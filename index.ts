@@ -5,6 +5,20 @@ const notion = new Client({
   auth: process.env.NOTION_API_KEY,
 })
 
+async function update() {
+  const pageId = '';
+
+  const response = await notion.pages.update({
+    page_id: pageId,
+    properties: {
+      'In stock': {
+        checkbox: true,
+      },
+    },
+  });
+  return response
+}
+
 
 async function main() {
   // notion url
@@ -13,7 +27,7 @@ async function main() {
 
   const response = await notion.pages.retrieve({ page_id: pageId });
 
-  return response.data
+  return response
 }
 
 main()
